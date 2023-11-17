@@ -26,14 +26,19 @@ headers = {
     "Content-Type": "application/json",
     "Notion-Version": version
 }
+
 search_url = "https://api.notion.com/v1/search"
 create_db_url = "https://api.notion.com/v1/databases"
 create_page_url = "https://api.notion.com/v1/pages"
-database_title = "Craigslist housing aggregator"
 
 # Main scraper and update function
 
 async def main(event):
+
+    # Get Notion payload from Lambda event
+
+   
+    database_title = event.get("notion_db_title")
 
     # Get craigslist payload from Lambda event
 
