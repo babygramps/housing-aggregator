@@ -33,7 +33,16 @@ database_title = "Craigslist housing aggregator"
 
 # Main scraper and update function
 
-async def main():
+async def main(event):
+
+    # Get craigslist payload from Lambda event
+
+    url = event.get("url")
+    params = event.get("params",{})
+
+    if not url:
+        print(f'No URL in payload')
+        return
 
     # Search Notion for the database. Create a new one if not found
 
@@ -46,13 +55,6 @@ async def main():
             print("Failed to create or find the database.")
             exit()
 
-    url = 'https://sfbay.craigslist.org/search/eby/apa'
-    params = {
-        'housing_type': [3, 4, 5, 6, 7],
-        'max_bedrooms': 2,
-        'nh': [112, 46, 47, 48, 49, 60, 62, 63, 65, 66],
-        'pets_dog': 1
-    }
 
     # Get existing Craigslist post urls saved in Notion
 
@@ -77,6 +79,10 @@ async def main():
                 link = post.a['href']
                 price = post.find('div', class_='price').text.strip()
                 location = post.find('div', class_='location').text.strip()
+
+                # Remove commas from location list
+
+                formatted_location = location.replace(',', '/')
 
                 listing_response = requests.get(link)
                 if listing_response.status_code == 200:
@@ -126,7 +132,7 @@ async def main():
                                 "properties": {
                                     "Title": {"title": [{"text": {"content": title}}]},
                                     "Price": {"number": int(price.replace("$", "").replace(",", "")) if price.startswith("$") else 0},
-                                    "Location": {"select": {"name": location}},
+                                    "Location": {"select": {"name": formatted_location}},
                                     "Bedroom": {"select": {"name": br}},  # Update as needed
                                     "Sq ft": {"rich_text": [{"text": {"content": ft2}}]},  # Update as needed
                                     "Date": {"date": {"start": valid_date}},  # Update as needed
@@ -149,5 +155,6 @@ async def main():
         print(f"Failed to retrieve data: {response.status_code}")
     print(f'Function complete')
 
-if __name__ == "__main__":
-    asyncio.run(main())
+    
+def lambda_handler(event, context):
+    asyncio.run(main(event))
