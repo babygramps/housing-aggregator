@@ -1,0 +1,81 @@
+/* App.module.css */
+
+.container {
+    /* App.module.css */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 33.33%; /* Form takes up 1/3 of the page width */
+    margin: 2rem auto; /* Centers the form on the page */
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: #eac3ec; /* calm, light background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  
+  .title {
+    color: #2e8b57; /* Green for money and growth */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  }
+  
+  .formGroup {
+    margin-bottom: 1rem;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2f4f4f; /* dark blue for data */
+    font-size: 1.2rem;
+  }
+  
+  .input,
+  .textarea {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border: 2px solid #2e8b57; /* green border for input fields */
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .checkboxContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .button {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #2e8b57; /* green for money */
+    color: #ffffff; /* white text for clarity */
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .button:hover {
+    background-color: #276a48; /* darker green on hover */
+  }
+  
+  .error {
+    color: #d32f2f; /* red for errors */
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  /* Add other styles as needed */
+  
